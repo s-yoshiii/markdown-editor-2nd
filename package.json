@@ -1,0 +1,16 @@
+{
+  "name": "markdown-editor-2nd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/s-yoshiii/markdown-editor-2nd.git",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "echo 'Hello! package.json'",
+    "build": "webpack --mode=production"
+  },
+  "dependencies": {
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
