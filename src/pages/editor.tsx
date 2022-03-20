@@ -1,5 +1,6 @@
 import { Box, Flex, Textarea } from '@chakra-ui/react';
 import * as React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { useStateWithStorage } from '../hooks/use_state_with_storage';
 import { Header } from '../components/header';
 const StorageKey = 'pages/editor:textarea';
@@ -23,7 +24,7 @@ export const Editor: React.FC = () => {
           />
         </Box>
         <Box w='50vw' p='3' overflowY='auto'>
-          Text入力エリア
+          <ReactMarkdown children={text} />
         </Box>
       </Flex>
     </>
