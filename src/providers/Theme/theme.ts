@@ -13,6 +13,30 @@ export const theme = extendTheme({
       'body *': {
         boxSizing: 'border-box',
       },
+      h1: {
+        fontSize: '5xl',
+        fontWeight: 'bold',
+      },
+      h2: {
+        fontSize: '4xl',
+        fontWeight: 'bold',
+      },
+      h3: {
+        fontSize: '3xl',
+        fontWeight: 'bold',
+      },
+      h4: {
+        fontSize: '2xl',
+        fontWeight: 'bold',
+      },
+      h5: {
+        fontSize: 'xl',
+        fontWeight: 'bold',
+      },
+      h6: {
+        fontSize: 'lg',
+        fontWeight: 'bold',
+      },
     },
   },
 });
