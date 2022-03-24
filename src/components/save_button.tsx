@@ -4,7 +4,7 @@ interface Props {
   children: string;
   onClick: () => void;
 }
-export const PrimaryButton: React.FC<Props> = (props) => (
+export const SaveButton: React.FC<Props> = (props) => (
   <Button
     bg='brand.200'
     color='white'

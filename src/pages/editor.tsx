@@ -1,16 +1,32 @@
-import { Box, Flex, Spacer, Textarea } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Spacer,
+  Textarea,
+  useDisclosure,
+} from '@chakra-ui/react';
 import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useStateWithStorage } from '../hooks/use_state_with_storage';
 import { Header } from '../components/header';
 import { putMemo } from '../indexeddb/memos';
-import { PrimaryButton } from '../components/primaryButton';
+import { SaveButton } from '../components/save_button';
 const StorageKey = 'pages/editor:textarea';
 export const Editor: React.FC = () => {
   const [text, setText] = useStateWithStorage('', StorageKey);
   const saveMemo = (): void => {
     putMemo('TITLE', text);
   };
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <Flex
@@ -25,7 +41,7 @@ export const Editor: React.FC = () => {
       >
         <Header />
         <Spacer />
-        <PrimaryButton onClick={saveMemo}>保存する</PrimaryButton>
+        <SaveButton onClick={onOpen}>保存する</SaveButton>
       </Flex>
       <Flex
         pos='fixed'
@@ -51,6 +67,23 @@ export const Editor: React.FC = () => {
           <ReactMarkdown children={text} />
         </Box>
       </Flex>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>テキストの内容を保存します。</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            保存内容のタイトルを入力して「保存」ボタンを押してください。
+            <Input mt={2} placeholder='Basic usage' />
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme='blue' mr={4} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant='ghost'>保存</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
