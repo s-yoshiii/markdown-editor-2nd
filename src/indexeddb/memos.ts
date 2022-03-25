@@ -1,4 +1,5 @@
 import Dexie from 'dexie';
+import { getDate } from '../utils';
 const db = new Dexie('markdown-editor');
 export interface MemoRecord {
   datetime: string;
@@ -10,6 +11,6 @@ db.version(1).stores({
 });
 const memos: Dexie.Table<MemoRecord, string> = db.table('memos');
 export const putMemo = async (title: string, text: string): Promise<void> => {
-  const datetime = new Date().toISOString();
+  const datetime = getDate();
   await memos.put({ datetime, title, text });
 };
