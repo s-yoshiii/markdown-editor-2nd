@@ -32,15 +32,21 @@ export const SaveModal: React.FC<Props> = (props) => {
             mt={2}
             value={title}
             onChange={(event) => setTitle(event.target.value)}
-            isReadOnly
           />
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme='blue' mr={4} onClick={onClose}>
-            Close
+          <Button
+            variant='outline'
+            borderColor='brand.400'
+            color='brand.400'
+            mr={4}
+            onClick={onClose}
+          >
+            キャンセル
           </Button>
           <Button
-            variant='ghost'
+            bg='brand.400'
+            color='white'
             onClick={() => {
               onSave(title);
               onClose();

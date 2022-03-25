@@ -6,7 +6,6 @@ import { Header } from '../components/header';
 import { SaveModal } from '../components/save_modal';
 import { putMemo } from '../indexeddb/memos';
 import { SaveButton } from '../components/save_button';
-const { useState } = React;
 const StorageKey = 'pages/editor:textarea';
 export const Editor: React.FC = () => {
   const [text, setText] = useStateWithStorage('', StorageKey);
