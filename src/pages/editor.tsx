@@ -6,6 +6,7 @@ import { Header } from '../components/header';
 import { SaveModal } from '../components/save_modal';
 import { putMemo } from '../indexeddb/memos';
 import { SaveButton } from '../components/save_button';
+import { Link } from 'react-router-dom';
 const StorageKey = 'pages/editor:textarea';
 export const Editor: React.FC = () => {
   const [text, setText] = useStateWithStorage('', StorageKey);
@@ -25,6 +26,7 @@ export const Editor: React.FC = () => {
         <Header />
         <Spacer />
         <SaveButton onClick={onOpen}>保存する</SaveButton>
+        <Link to='/history'>履歴を見る</Link>
       </Flex>
       <Flex
         pos='fixed'
