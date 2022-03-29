@@ -13,21 +13,10 @@ export const Editor: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Flex
-        p={[4, 2]}
-        pos='fixed'
-        top='0'
-        left='0'
-        zIndex={2}
-        w='100%'
-        bg='brand.400'
-        h='14'
-      >
-        <Header />
-        <Spacer />
+      <Header title={'Markdown Editor'}>
         <SaveButton onClick={onOpen}>保存する</SaveButton>
         <Link to='/history'>履歴を見る</Link>
-      </Flex>
+      </Header>
       <Flex
         pos='fixed'
         paddingTop='14'
