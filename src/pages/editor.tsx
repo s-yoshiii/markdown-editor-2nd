@@ -1,4 +1,12 @@
-import { Box, Flex, Spacer, Textarea, useDisclosure } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Text,
+  Textarea,
+  useDisclosure,
+  Link,
+  HStack,
+} from '@chakra-ui/react';
 import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useStateWithStorage } from '../hooks/use_state_with_storage';
@@ -6,16 +14,29 @@ import { Header } from '../components/header';
 import { SaveModal } from '../components/save_modal';
 import { putMemo } from '../indexeddb/memos';
 import { SaveButton } from '../components/save_button';
-import { Link } from 'react-router-dom';
-const StorageKey = 'pages/editor:textarea';
-export const Editor: React.FC = () => {
-  const [text, setText] = useStateWithStorage('', StorageKey);
+import { Link as ReachLink } from 'react-router-dom';
+import { DownloadIcon } from '@chakra-ui/icons';
+interface Props {
+  text: string;
+  setText: (text: string) => void;
+}
+export const Editor: React.FC<Props> = (props) => {
+  const { text, setText } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <Header title={'Markdown Editor'}>
-        <SaveButton onClick={onOpen}>保存する</SaveButton>
-        <Link to='/history'>履歴を見る</Link>
+        <HStack spacing='4'>
+          <SaveButton onClick={onOpen}>
+            保存する
+            <DownloadIcon w={4} h={4} ml='1' />
+          </SaveButton>
+          <Text>
+            <Link as={ReachLink} to='/history' color='white'>
+              履歴を見る
+            </Link>
+          </Text>
+        </HStack>
       </Header>
       <Flex
         pos='fixed'

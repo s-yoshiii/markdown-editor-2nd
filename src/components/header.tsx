@@ -1,7 +1,5 @@
-import { Flex, Heading, Spacer, useDisclosure } from '@chakra-ui/react';
+import { Flex, Heading, Spacer } from '@chakra-ui/react';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { SaveButton } from './save_button';
 interface Props {
   title: string;
   children: React.ReactNode;
@@ -18,6 +16,7 @@ export const Header: React.FC<Props> = (props) => {
       w='100%'
       bg='brand.400'
       h='14'
+      align='center'
     >
       <Heading as='h1' size='lg' color='white'>
         {title}
