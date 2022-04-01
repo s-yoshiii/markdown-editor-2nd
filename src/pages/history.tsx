@@ -1,10 +1,22 @@
-import { ArrowBackIcon } from '@chakra-ui/icons';
-import { Box, Container, Heading, Text, VStack } from '@chakra-ui/react';
+import {
+  ArrowBackIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from '@chakra-ui/icons';
+import {
+  Box,
+  Button,
+  Container,
+  Heading,
+  HStack,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/header';
 import { SaveButton } from '../components/save_button';
-import { getMemos, MemoRecord } from '../indexeddb/memos';
+import { getMemos, getMemoPageCount, MemoRecord } from '../indexeddb/memos';
 
 const { useState, useEffect } = React;
 interface Props {
@@ -13,10 +25,22 @@ interface Props {
 export const History: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const [memos, setMemos] = useState<MemoRecord[]>([]);
+  const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(1);
   const { setText } = props;
   useEffect(() => {
-    getMemos().then(setMemos);
+    getMemos(1).then(setMemos);
+    getMemoPageCount().then(setMaxPage);
   }, []);
+  const canNextPage: boolean = page < maxPage;
+  const canPrevPage: boolean = page > 1;
+  const movePage = (targetPage: number) => {
+    if (targetPage < 1 || maxPage < targetPage) {
+      return;
+    }
+    setPage(targetPage);
+    getMemos(targetPage).then(setMemos);
+  };
   return (
     <>
       <Header title={'History'}>
@@ -61,6 +85,33 @@ export const History: React.FC<Props> = (props) => {
             </Container>
           ))}
         </VStack>
+        <HStack spacing='24px' justify='center'>
+          <Button
+            leftIcon={<ChevronLeftIcon />}
+            fontSize='md'
+            size='md'
+            color='white'
+            bg='brand.300'
+            onClick={() => movePage(page - 1)}
+            isDisabled={!canPrevPage}
+          >
+            Prev
+          </Button>
+          <Text>
+            {page} / {maxPage}
+          </Text>
+          <Button
+            rightIcon={<ChevronRightIcon />}
+            fontSize='md'
+            color='white'
+            bg='brand.300'
+            size='md'
+            onClick={() => movePage(page + 1)}
+            isDisabled={!canNextPage}
+          >
+            Next
+          </Button>
+        </HStack>
       </Box>
     </>
   );
