@@ -9,13 +9,15 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { useStateWithStorage } from '../hooks/use_state_with_storage';
 import { Header } from '../components/header';
 import { SaveModal } from '../components/save_modal';
 import { putMemo } from '../indexeddb/memos';
 import { SaveButton } from '../components/save_button';
 import { Link as ReachLink } from 'react-router-dom';
 import { DownloadIcon } from '@chakra-ui/icons';
+import TestWorker from 'worker-loader!../worker/test.ts';
+const testWorker = new TestWorker();
+const { useState, useEffect } = React;
 interface Props {
   text: string;
   setText: (text: string) => void;
@@ -23,6 +25,15 @@ interface Props {
 export const Editor: React.FC<Props> = (props) => {
   const { text, setText } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  useEffect(() => {
+    testWorker.onmessage = (event) => {
+      console.log('Main thread Received:', event.data);
+    };
+  }, []);
+
+  useEffect(() => {
+    testWorker.postMessage(text);
+  }, [text]);
   return (
     <>
       <Header title={'Markdown Editor'}>
