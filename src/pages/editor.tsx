@@ -8,15 +8,14 @@ import {
   HStack,
 } from '@chakra-ui/react';
 import * as React from 'react';
-import ReactMarkdown from 'react-markdown';
 import { Header } from '../components/header';
 import { SaveModal } from '../components/save_modal';
 import { putMemo } from '../indexeddb/memos';
 import { SaveButton } from '../components/save_button';
 import { Link as ReachLink } from 'react-router-dom';
 import { DownloadIcon } from '@chakra-ui/icons';
-import TestWorker from 'worker-loader!../worker/test.ts';
-const testWorker = new TestWorker();
+import ConvertMarkdownWorker from 'worker-loader!../worker/convert_markdown_worker';
+const convertMarkdownWorker = new ConvertMarkdownWorker();
 const { useState, useEffect } = React;
 interface Props {
   text: string;
@@ -25,14 +24,15 @@ interface Props {
 export const Editor: React.FC<Props> = (props) => {
   const { text, setText } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [html, setHtml] = useState('');
   useEffect(() => {
-    testWorker.onmessage = (event) => {
-      console.log('Main thread Received:', event.data);
+    convertMarkdownWorker.onmessage = (event) => {
+      setHtml(event.data.html);
     };
   }, []);
 
   useEffect(() => {
-    testWorker.postMessage(text);
+    convertMarkdownWorker.postMessage(text);
   }, [text]);
   return (
     <>
@@ -70,7 +70,7 @@ export const Editor: React.FC<Props> = (props) => {
           />
         </Box>
         <Box w='50vw' p='3' overflowY='auto'>
-          <ReactMarkdown children={text} />
+          <div dangerouslySetInnerHTML={{ __html: html }} />
         </Box>
       </Flex>
       <SaveModal
