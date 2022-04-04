@@ -34,9 +34,9 @@ module.exports = {
   },
   plugins: [
     new WorkboxWebpackPlugin.GenerateSW({
-      globDirectory: path.resolve(__dirname, 'dist'),
-      globPatterns: '*.{html,js,css}',
-      swDest: path.resolve(__dirname, 'dist') + '/sw.js',
+      // globDirectory: __dirname + '/dist',
+      // globPatterns: '*.{html,js,css}',
+      swDest: __dirname + '/dist/sw.js',
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/index.html'),
