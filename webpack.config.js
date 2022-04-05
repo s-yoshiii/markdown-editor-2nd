@@ -34,9 +34,10 @@ module.exports = {
   },
   plugins: [
     new WorkboxWebpackPlugin.GenerateSW({
-      // globDirectory: __dirname + '/dist',
-      // globPatterns: '*.{html,js,css}',
       swDest: __dirname + '/dist/sw.js',
+      maximumFileSizeToCacheInBytes: 5000000000,
+      clientsClaim: true,
+      skipWaiting: true,
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/index.html'),
