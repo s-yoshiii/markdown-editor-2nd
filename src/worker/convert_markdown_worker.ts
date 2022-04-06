@@ -6,6 +6,5 @@ worker.addEventListener('message', (event) => {
   const html = sanitizeHtml(marked.parse(text), {
     allowedTags: [...sanitizeHtml.defaults.allowedTags, 'h1', 'h2'],
   });
-  console.log(html);
   worker.postMessage({ html });
 });

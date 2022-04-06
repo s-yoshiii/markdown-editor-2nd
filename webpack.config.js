@@ -48,12 +48,21 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new WebpackPwaManifest({
-      name: 'MarkdownEditor',
+      icons: [
+        {
+          src: path.resolve('src/images/icon_256x256.png'),
+          destination: path.join('images', 'icons'),
+          sizes: [96, 128, 192, 256],
+          type: 'image/png',
+        },
+      ],
+      start_url: './index.html',
+      display: 'standalone',
+      theme_color: '#525352',
       filename: 'manifest.json',
-      short_name: 'MarkdownEditor',
       description: 'My awesome Progressive Web App!',
-      background_color: '#ffffff',
-      start_url: '/#/editor',
+      name: 'MarkdownEditor',
+      publicPath: './',
     }),
     new GenerateSW({
       swDest: path.resolve(__dirname, 'dist/sw.js'),
