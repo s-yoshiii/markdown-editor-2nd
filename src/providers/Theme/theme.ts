@@ -12,6 +12,7 @@ export const theme = extendTheme({
     global: {
       'body *': {
         boxSizing: 'border-box',
+        lineHeight: '1.5',
       },
       h1: {
         fontSize: '5xl',
@@ -36,6 +37,41 @@ export const theme = extendTheme({
       h6: {
         fontSize: 'lg',
         fontWeight: 'bold',
+      },
+      ul: {
+        li: {
+          position: 'relative',
+          paddingLeft: '1.5em',
+          _before: {
+            content: `""`,
+            display: 'block',
+            background: 'brand.400',
+            width: '0.3em',
+            height: '0.3em',
+            borderRadius: '50%',
+            position: 'absolute',
+            top: '0.5em',
+            left: '0.5em',
+          },
+        },
+      },
+      ol: {
+        counterReset: 'count 0',
+        li: {
+          position: 'relative',
+          paddingLeft: '1.5em',
+          listStyle: 'none',
+          _before: {
+            content: `counter(count)"."`,
+            counterIncrement: 'count 1',
+            display: 'inline-block',
+            color: 'brand.400',
+            fontWeight: '600',
+            position: 'absolute',
+            top: '0',
+            left: '0.2em',
+          },
+        },
       },
     },
   },
