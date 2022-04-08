@@ -17,28 +17,35 @@ export const theme = extendTheme({
       h1: {
         fontSize: '5xl',
         fontWeight: 'bold',
+        marginBottom: '0.5em',
       },
       h2: {
         fontSize: '4xl',
         fontWeight: 'bold',
+        marginBottom: '0.5em',
       },
       h3: {
         fontSize: '3xl',
         fontWeight: 'bold',
+        marginBottom: '0.5em',
       },
       h4: {
         fontSize: '2xl',
         fontWeight: 'bold',
+        marginBottom: '0.5em',
       },
       h5: {
         fontSize: 'xl',
         fontWeight: 'bold',
+        marginBottom: '0.5em',
       },
       h6: {
         fontSize: 'lg',
         fontWeight: 'bold',
+        marginBottom: '0.5em',
       },
       ul: {
+        marginBottom: '1em',
         li: {
           position: 'relative',
           paddingLeft: '1.5em',
@@ -56,6 +63,7 @@ export const theme = extendTheme({
         },
       },
       ol: {
+        marginBottom: '1em',
         counterReset: 'count 0',
         li: {
           position: 'relative',
@@ -72,6 +80,42 @@ export const theme = extendTheme({
             left: '0.2em',
           },
         },
+      },
+      em: {
+        fontStyle: 'italic',
+      },
+      hr: {
+        borderColor: 'gray.400',
+        margin: '1em 0',
+      },
+      p: {
+        marginBottom: '1em',
+      },
+      a: {
+        textDecoration: 'underline',
+      },
+      table: {
+        marginBottom: '1em',
+        'td,th': {
+          padding: '0.5em',
+          background: 'white',
+          borderWidth: '1px',
+          borderStyle: 'solid',
+          borderColor: 'gray.300',
+        },
+        thead: {
+          th: {
+            background: 'brand.300',
+            color: 'white',
+            borderColor: 'white',
+          },
+        },
+      },
+      blockquote: {
+        borderLeft: '5px solid',
+        borderColor: 'gray.500',
+        padding: '1em',
+        background: 'gray.50',
       },
     },
   },
