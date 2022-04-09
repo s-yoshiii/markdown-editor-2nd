@@ -116,6 +116,18 @@ export const theme = extendTheme({
         borderColor: 'gray.500',
         padding: '1em',
         background: 'gray.50',
+        marginBottom: '1em',
+        blockquote: {
+          marginBottom: '0',
+        },
+      },
+      dl: {
+        dt: {
+          fontWeight: 'bold',
+        },
+        dd: {
+          paddingLeft: '1em',
+        },
       },
     },
   },

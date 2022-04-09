@@ -62,14 +62,14 @@ export const Editor: React.FC<Props> = (props) => {
             placeholder='Markdown'
             height='100%'
             variant='flushed'
-            p='3'
+            p='6'
             onChange={(e) => {
               setText(e.target.value);
             }}
             value={text}
           />
         </Box>
-        <Box w='50vw' p='3' overflowY='auto'>
+        <Box w='50vw' p='6' overflowY='auto'>
           <div dangerouslySetInnerHTML={{ __html: html }} />
         </Box>
       </Flex>
